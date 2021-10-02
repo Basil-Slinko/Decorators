@@ -19,8 +19,8 @@ def write_logging(function):
 def find_a_unique_id(ids_dict):
     geo_ids = ids_dict.values()
     all_ids = []
-    for id_ in geo_ids:
-        all_ids += id_
+    for item in geo_ids:
+        all_ids += item
     res = list(set(all_ids))
     return res
 
