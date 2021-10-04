@@ -2,8 +2,7 @@ from datetime import datetime
 import os
 
 
-folder_path = os.getcwd()
-folder_with_logs = f"{folder_path}/logs"
+folder_with_logs = f"{os.getcwd()}/logs"
 
 
 def logger_path(path):
