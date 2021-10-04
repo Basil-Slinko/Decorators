@@ -2,25 +2,31 @@ from datetime import datetime
 import os
 
 
-def write_logging(function):
-    def write(path_to_logs, *args, **kwargs):
-        os.chdir(path_to_logs)
-        with open('def_logging.log', 'a', encoding='utf-8') as log_file:
-            result = function(*args, **kwargs)
-            log_file.write(f'Дата и время вызова функции: {datetime.now()}\n'
-                           f'Имя функции: {function.__name__}\n'
-                           f'Аргументы, с которыми вызвалась ф-ия: {args, kwargs}\n'
-                           f'Возвращаемое значение функции: {result}\n\n\n')
-        return result
-    return write
+folder_path = os.getcwd()
+folder_with_logs = f"{folder_path}/logs"
 
 
-@write_logging
+def logger_path(path):
+    def write_logging(function):
+        def write(*args, **kwargs):
+            os.chdir(path)
+            with open('def_logging.log', 'a', encoding='utf-8') as log_file:
+                result = function(*args, **kwargs)
+                log_file.write(f'Дата и время вызова функции: {datetime.now()}\n'
+                               f'Имя функции: {function.__name__}\n'
+                               f'Аргументы, с которыми вызвалась ф-ия: {args, kwargs}\n'
+                               f'Возвращаемое значение функции: {result}\n\n\n')
+            return result
+        return write
+    return write_logging
+
+
+@logger_path(folder_with_logs)
 def find_a_unique_id(ids_dict):
     geo_ids = ids_dict.values()
     all_ids = []
-    for item in geo_ids:
-        all_ids += item
+    for id_ in geo_ids:
+        all_ids += id_
     res = list(set(all_ids))
     return res
 
@@ -30,7 +36,5 @@ if __name__ == '__main__':
            'user2': [54, 54, 119, 119, 119],
            'user3': [213, 98, 98, 35]}
 
-    folder_path = os.getcwd()
-    folder_with_logs = f"{folder_path}/logs"
-
-    find_a_unique_id(folder_with_logs, ids)
+    find_a_unique_id(ids)
+ 
