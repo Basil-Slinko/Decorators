@@ -2,9 +2,6 @@ from datetime import datetime
 import os
 
 
-folder_with_logs = f"{os.getcwd()}/logs"
-
-
 def logger_path(path):
     def write_logging(function):
         def write(*args, **kwargs):
