@@ -17,7 +17,7 @@ def logger_path(path):
     return write_logging
 
 
-@logger_path(folder_with_logs)
+@logger_path(f"{os.getcwd()}/logs")
 def find_a_unique_id(ids_dict):
     geo_ids = ids_dict.values()
     all_ids = []
