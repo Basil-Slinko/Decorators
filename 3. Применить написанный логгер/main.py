@@ -19,7 +19,7 @@ def logger_path(path):
 
 @logger_path(f"{os.getcwd()}/logs")
 def find_a_unique_id(ids_dict):
-    return list(set([id for user in ids_dict for _ in ids_dict[user]]))
+    return list(set([id for user in ids_dict for id in ids_dict[user]]))
 
 
 if __name__ == '__main__':
